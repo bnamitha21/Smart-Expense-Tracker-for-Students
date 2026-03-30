@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     @Autowired
@@ -30,7 +29,7 @@ public class AuthController {
         return repo.save(user);
     }
 
-    // ✅ LOGIN (FINAL FIXED)
+    // ✅ LOGIN
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
 

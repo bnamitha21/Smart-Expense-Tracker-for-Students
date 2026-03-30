@@ -17,24 +17,21 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class SecurityConfig {
 
-    // ✅ PASSWORD ENCODER
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // ✅ JWT FILTER
     @Bean
     public JwtAuthenticationFilter jwtFilter() {
         return new JwtAuthenticationFilter();
     }
 
-    // ✅ CORS CONFIG (FINAL FIX)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
 
-        // 🔥 Allow all origins (fixes Vercel dynamic URLs)
+        // 🔥 allow all (safe for your use case now)
         config.addAllowedOriginPattern("*");
 
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
@@ -47,7 +44,6 @@ public class SecurityConfig {
         return source;
     }
 
-    // ✅ SECURITY FILTER CHAIN (FINAL FIX)
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -55,12 +51,8 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // 🔥 allow auth APIs
                 .requestMatchers("/api/auth/**").permitAll()
-
-                // 🔥 VERY IMPORTANT: allow preflight requests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class);
