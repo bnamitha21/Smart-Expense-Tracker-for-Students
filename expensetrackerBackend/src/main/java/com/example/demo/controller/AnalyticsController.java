@@ -9,7 +9,7 @@ import java.util.*;
 
 @RestController
 @RequestMapping("/api/analytics")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*") 
 public class AnalyticsController {
 
     @Autowired

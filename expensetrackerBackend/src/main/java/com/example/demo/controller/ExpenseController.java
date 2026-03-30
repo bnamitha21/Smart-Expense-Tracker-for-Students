@@ -14,7 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
-@CrossOrigin(origins = "http://localhost:5173") // ✅ VERY IMPORTANT
+
+@CrossOrigin(origins = "*") // ✅ VERY IMPORTANT
 public class ExpenseController {
 
     @Autowired
