@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         config.setAllowedOrigins(List.of(
         	    "http://localhost:5173",
-        	    "https://smart-expense-tracker-for-students.vercel.app"
+        	    "https://smart-expense-tracker-for-students-eta.vercel.app"
         	));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
