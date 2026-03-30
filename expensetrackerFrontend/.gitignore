@@ -33,3 +33,4 @@ Thumbs.db
 
 # Optional (if generated)
 coverage/
+dist/
